@@ -74,6 +74,7 @@ class Lesson:
     role: np.ndarray        # 'T' or 'S' per utterance, in order
     move: np.ndarray        # canonical move number (or 0 if none) per utterance
     macro: np.ndarray       # macro-state index 0/1/2 per utterance
+    words: np.ndarray = None  # word count per utterance (a continuous magnitude feature)
 
 
 def grade_from_name(name: str) -> int | None:
@@ -85,7 +86,7 @@ def load_lesson(path: str) -> Lesson:
     """Read one transcript .xlsx into an ordered sequence of (role, move, macro)."""
     import pandas as pd
     df = pd.read_excel(path)
-    roles, moves, macros = [], [], []
+    roles, moves, macros, words = [], [], [], []
     for _, row in df.iterrows():
         spk = str(row.get("Speaker", "")).strip()
         if not spk or spk.lower() == "nan":
@@ -101,9 +102,11 @@ def load_lesson(path: str) -> Lesson:
         roles.append(role)
         moves.append(num or 0)
         macros.append(macro)
+        sent = row.get("Sentence")
+        words.append(len(str(sent).split()) if sent is not None and str(sent) != "nan" else 1)
     name = os.path.splitext(os.path.basename(path))[0]
     return Lesson(name, grade_from_name(name), np.array(roles), np.array(moves),
-                  np.array(macros, dtype=int))
+                  np.array(macros, dtype=int), np.array(words, dtype=float))
 
 
 # --------------------------------------------------------------------------- #

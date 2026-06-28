@@ -26,6 +26,7 @@ STAGES = [
     # Part 3 -- the empirical case study (requires the TalkMoves corpus; see
     # experiments/fetch_talkmoves.py -- skipped gracefully if absent)
     ("Part III edu1-6 -- real classroom case study", "edu_casestudy"),
+    ("Part III edu7-8 -- non-abelian holonomy, empirical Prop. 6.1", "edu_nonabelian"),
 ]
 
 

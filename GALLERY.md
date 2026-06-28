@@ -96,6 +96,13 @@ Suresh et al., LREC 2022). Fetch with `python experiments/fetch_talkmoves.py`, t
 | ![](assets/edu5_genuine_forged.png) | **ethics education** | teacher uptake (mean 0.20, 8% genuine); corr(uptake, autonomy)=+0.25 |
 | ![](assets/edu6_synthesis.png) | synthesis | the quantities by grade; the Θ distribution (symmetric around 0) |
 
+**Deep extension — a non-abelian holonomy and an empirical Prop. 6.1** (`experiments/edu_nonabelian.py`):
+
+| Figure | Step | What it shows (from real data) |
+|--------|------|--------------------------------|
+| ![](assets/edu7_reachable_set.png) | **empirical Prop. 6.1** | real holonomies are non-universal (entropy 0.906 < shuffled 0.979 < Haar 0.999) |
+| ![](assets/edu8_holonomy_discriminates.png) | order = power | the holonomy predicts generativity (R=0.25); shuffling the order kills it (permutation p=0.025) |
+
 ---
 
 ### Module map

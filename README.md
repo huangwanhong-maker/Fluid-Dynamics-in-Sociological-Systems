@@ -487,8 +487,42 @@ good/bad sign Θ across all 169 lessons (a roughly symmetric spread around zero)
 classrooms are saturated with power, and they divide — not by how much knowledge is transferred, but
 by whether that power is generative or dominative and whether student voice circulates.*
 
-To reproduce: `python experiments/fetch_talkmoves.py` (downloads the corpus, not committed here),
-then `PYTHONPATH=. python experiments/edu_casestudy.py`.
+### Closing the gap: a non-abelian holonomy and an empirical Proposition 6.1
+
+The analysis above uses the *classical* shadow of the formalism — stochastic transition matrices. We
+can push it up to the genuinely non-abelian layer (Stage III) and put the model's deepest claim to
+data. Each utterance becomes an SU(2) rotation (axis = its discourse macro-state, angle = its length),
+so a stretch of discourse is a **path-ordered, order-dependent holonomy** — power as non-commutativity,
+not by analogy but literally.
+
+**Is the reachable set non-universal? (Proposition 6.1, on real data.)**
+
+![empirical Prop 6.1](assets/edu7_reachable_set.png)
+
+*Prop. 6.1 says a robust good/bad criterion can exist only if the reachable set of holonomies is
+**constrained** (non-universal), not dense (universal). Over 160 lessons (17,535 window holonomies),
+the real reachable set has entropy **0.906** — clearly below an order-shuffled null (**0.979**) and far
+below the Haar/universal reference (**0.999**). Real classroom discourse lives in exactly the
+non-abelian-yet-non-universal band the theory requires — and the constraint comes from the *order* of
+moves: shuffling the order pushes the holonomies toward the universal limit.*
+
+**Does the order — the non-commutativity — carry the good/bad signal?**
+
+![order carries the signal](assets/edu8_holonomy_discriminates.png)
+
+*The non-abelian holonomy predicts a lesson's generative output at R = **0.25**. Destroying only the
+*order* of moves (a permutation null that preserves move and length frequencies) collapses the
+prediction to R ≈ 0.13 — the real value sits in the tail, **permutation p = 0.025**. The good/bad
+signal lives in the non-commutative structure (the order of acts), not in the frequencies — which is
+exactly what the model means by **power**.*
+
+This is a proof of concept, not a validated instrument (the axis/angle assignment is a stipulation, the
+effect sizes are modest, it is one corpus). But it is a genuine, significant, data-grounded instance of
+the formalism's deepest claim — evidence that the distance between Parts I–II and Part III can be
+crossed, not just acknowledged.
+
+To reproduce: `python experiments/fetch_talkmoves.py` (downloads the corpus, not committed here), then
+`PYTHONPATH=. python experiments/edu_casestudy.py` and `experiments/edu_nonabelian.py`.
 
 ---
 
@@ -516,6 +550,7 @@ PYTHONPATH=. python experiments/stage6_ethics.py    # or run any single stage
 | `fluid_socio/ethics.py` | the §10 operationalization: state vectors, transition operators, Θ, 𝒞 |
 | `fluid_socio/deliberation.py` | deliberation dynamics: the three attractors, holonomy on the deliberative loop |
 | `fluid_socio/education.py` | Part 3 pipeline: ingest TalkMoves transcripts → (a,d,g), transition operators, Θ, 𝒞, uptake |
+| `fluid_socio/braid_discourse.py` | Part 3 (deep): utterances → SU(2) holonomy, reachable-set coverage, empirical Prop. 6.1 |
 
 `experiments/` has one script per stage (`stage*.py` for Part 1, `ethics_*.py` for Part 2) plus
 `make_gallery.py`, which regenerates all 26 figures; `tests/` holds the regression tests; figures
@@ -566,6 +601,10 @@ inherit that grading. Read each in the right register:
   real, the construct validity is argued, not established* (exactly the status §10.6 assigns). Caveats:
   one subject (K-12 math), one annotation scheme, no causal identification, per-lesson Θ is noisy and
   meaningful mainly in aggregate, and the by-grade trends (edu6) rest on few lessons at grades 8/11/12.
+  The non-abelian extension (edu7–edu8) lifts this to a genuine SU(2) holonomy and finds a *significant*
+  order effect (permutation p = 0.025) and a non-universal reachable set — but adds one more stipulation
+  (the axis/angle assignment), and its effect sizes are modest. It is a proof of concept that the Stage
+  III machinery *can* be exercised on data, not a validated measurement of it.
 
 **Modeling decisions worth knowing.**
 
