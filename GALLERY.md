@@ -81,6 +81,23 @@ mapping). One figure per claim.
 
 ---
 
+# Part 3 — Case Study: Quantitative Ethics in Real Classrooms
+
+The instrument applied to the **TalkMoves corpus** (169 real K-12 math lessons, grades 3–12;
+Suresh et al., LREC 2022). Fetch with `python experiments/fetch_talkmoves.py`, then
+`python experiments/edu_casestudy.py`.
+
+| Figure | Step | What it shows (from real data) |
+|--------|------|--------------------------------|
+| ![](assets/edu1_transcript.png) | the raw data | one lesson as a turn sequence of talk moves (teacher/student × Passive/Controlling/Generative) |
+| ![](assets/edu2_state_vector.png) | state vector (a,d,g) | two real lessons at the extremes: Θ=+0.96 (generative) vs Θ=−1.00 (dominative) |
+| ![](assets/edu3_transition_operators.png) | transition operators | `T_ts`, `T_st`, the holonomy, and the commutator (power 𝒞=1.59 for this lesson) |
+| ![](assets/edu4_power_geometry.png) | **ethics in education** | the (𝒞, Θ) plane over 169 lessons: mean 𝒞≈0.82, Θ>0 in 48% — power-to vs power-over |
+| ![](assets/edu5_genuine_forged.png) | **ethics education** | teacher uptake (mean 0.20, 8% genuine); corr(uptake, autonomy)=+0.25 |
+| ![](assets/edu6_synthesis.png) | synthesis | the quantities by grade; the Θ distribution (symmetric around 0) |
+
+---
+
 ### Module map
 
 | Module | Provides |
@@ -93,3 +110,4 @@ mapping). One figure per claim.
 | `fluid_socio/braid.py` | braid representations (Ising, Fibonacci), Yang-Baxter, reachable sets |
 | `fluid_socio/ethics.py` | §10 operationalization: state vectors, transition operators, Θ, C |
 | `fluid_socio/deliberation.py` | deliberation dynamics: the three attractors, holonomy on the deliberative loop |
+| `fluid_socio/education.py` | Part 3: ingest TalkMoves transcripts → (a,d,g), transition operators, Θ, 𝒞, uptake |

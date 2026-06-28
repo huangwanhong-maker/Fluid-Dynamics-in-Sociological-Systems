@@ -58,12 +58,12 @@ next; the right-hand boundary (why the symmetry breaks) is declared out of scope
 3. **Ethics model** — the dynamics read normatively: the good/bad criterion, power-to vs
    power-over, the trilemma, solidification, deliberation dynamics, and the test cases, plus the
    §10 discretization (Θ, 𝒞). *(done — Part 2)*
-4. **Empirical study** — the educational case study; currently on synthetic cohorts, next on
-   real interaction data. *(synthetic done; real data is the open next step)*
+4. **Empirical study** — the educational case study on **real** classroom data (the TalkMoves
+   corpus, 169 lessons), for both ethics *in* education and ethics education. *(done — Part 3)*
 
-This document is in two parts: **Part 1 — The dynamics** (the formalism, step by step) and
+This document is in three parts: **Part 1 — The dynamics** (the formalism, step by step),
 **Part 2 — The Ethics Model** (the same dynamics read normatively, with the concept→computation
-mapping).
+mapping), and **Part 3 — Case study** (the instrument applied to real classroom discourse).
 
 A guiding discipline, taken from the papers themselves: only the **sign, order, and
 non-commutativity** of a holonomy are ever reported — never an absolute magnitude (§4.5, §10.1).
@@ -419,6 +419,79 @@ whether the judgement returns value to the relation or extracts it.*
 
 ---
 
+# Part 3 — Case study: quantitative ethics in real classrooms
+
+Parts 1–2 ran on the formalism and on synthetic / illustrative models. **Part 3 turns the
+instrument on real data.** It analyzes the **TalkMoves corpus** — K-12 mathematics lesson
+transcripts annotated for teacher and student discourse moves (Suresh et al., LREC 2022,
+CC BY-NC-SA 4.0) — **169 real lessons, grades 3–12**. It answers both senses of "ethics + education":
+
+- **Ethics *in* education** — is a teaching relation generative (power-to) or dominative (power-over)?
+  Measured as Θ and 𝒞 from the real discourse.
+- **Ethics education** — is the classroom's deliberative practice genuine or forged? Measured as the
+  teacher's *uptake* of student contributions (do student ideas circulate back?).
+
+The mapping (the concept table, made operational on real talk moves): student *claims* and *relating
+to peers* → autonomy `a`; *claims* and *reasoning* → generative output `g`; the teacher's share of the
+floor → dependence `d`; the turn-sequence of moves → transition operators `T` on a common
+{Passive, Controlling, Generative} state space → holonomy and power 𝒞; teacher *revoicing / restating
+/ relating* after a student idea → value returned = genuine deliberation.
+
+**The raw data — one real lesson as a sequence of talk moves.**
+
+![a real transcript](assets/edu1_transcript.png)
+
+*Each utterance is a colored tick (Passive / Controlling / Generative), teacher row above, student row
+below. The actual rhythm of who speaks and what kind of move it is — the input the pipeline reads.*
+
+**The relational state vector (a, d, g), read from the talk-move mix.**
+
+![state vector from real data](assets/edu2_state_vector.png)
+
+*Two real lessons at the extremes: a generative one (Θ = +0.96, autonomy rising, dependence falling
+across the lesson) and a dominative one (Θ = −1.00). The student-move distribution and the
+within-lesson trajectory both come straight from the annotations.*
+
+**Transition operators and power, estimated from the turn sequence.**
+
+![transition operators](assets/edu3_transition_operators.png)
+
+*For one lesson: `T_{t→s}` and `T_{s→t}` (the empirical move-transition matrices on {P, C, G}), their
+product (the holonomy `H = T_ts T_st`), and their commutator — whose norm is the power 𝒞 = 1.59 here.
+Power is literally measured as the non-commutativity of real classroom turn-taking.*
+
+**Ethics *in* education — the power-geometry of 169 real classrooms.**
+
+![corpus power geometry](assets/edu4_power_geometry.png)
+
+*The synthetic Stage VI plane, now realized on real data. Almost every lesson carries power (mean
+𝒞 ≈ 0.82); they split roughly evenly (Θ>0 in 48%) into generative (power-to) and dominative
+(power-over). Color is generative output `g`. Justice as the geometry of power, measured.*
+
+**Ethics education — genuine vs forged classroom deliberation.**
+
+![genuine vs forged](assets/edu5_genuine_forged.png)
+
+*Teacher uptake of student claims/reasoning across 145 lessons. The distribution skews low (mean 0.20;
+only 8% are genuine-leaning): in most classrooms, student contributions rarely circulate back — the
+discourse leans **forged**, the holonomic-spiral of co-authorship not sustained. Yet uptake correlates
+positively with student autonomy (corr +0.25): where the relation *does* return value to its authors,
+students act with more agency — the model's prediction, borne out on real data.*
+
+**Synthesis across the corpus.**
+
+![corpus synthesis](assets/edu6_synthesis.png)
+
+*How autonomy, generativity, dependence, and uptake move with grade level, and the distribution of the
+good/bad sign Θ across all 169 lessons (a roughly symmetric spread around zero). Two real findings:
+classrooms are saturated with power, and they divide — not by how much knowledge is transferred, but
+by whether that power is generative or dominative and whether student voice circulates.*
+
+To reproduce: `python experiments/fetch_talkmoves.py` (downloads the corpus, not committed here),
+then `PYTHONPATH=. python experiments/edu_casestudy.py`.
+
+---
+
 # Using the code
 
 ```bash
@@ -442,6 +515,7 @@ PYTHONPATH=. python experiments/stage6_ethics.py    # or run any single stage
 | `fluid_socio/braid.py` | braid representations (Ising, Fibonacci), Yang-Baxter check, reachable sets, fusion dims |
 | `fluid_socio/ethics.py` | the §10 operationalization: state vectors, transition operators, Θ, 𝒞 |
 | `fluid_socio/deliberation.py` | deliberation dynamics: the three attractors, holonomy on the deliberative loop |
+| `fluid_socio/education.py` | Part 3 pipeline: ingest TalkMoves transcripts → (a,d,g), transition operators, Θ, 𝒞, uptake |
 
 `experiments/` has one script per stage (`stage*.py` for Part 1, `ethics_*.py` for Part 2) plus
 `make_gallery.py`, which regenerates all 26 figures; `tests/` holds the regression tests; figures
@@ -484,6 +558,15 @@ inherit that grading. Read each in the right register:
   diagram). These make the *structure* of a claim visible; they are not derived from data and their
   numbers are stipulated.
 
+- **Real data (a genuine measurement, with a stipulated operationalization).** Part 3 (edu1–edu6) is
+  computed from the real TalkMoves corpus — every Θ, 𝒞, and uptake value is measured from actual
+  annotated classroom turns. What is *chosen* is the operationalization: the map from talk-move labels
+  to (a, d, g), the 3-macro-state space for the transition operators, dependence as teacher floor-share,
+  and uptake as the genuine/forged proxy. These are defensible but not unique; the *measurements are
+  real, the construct validity is argued, not established* (exactly the status §10.6 assigns). Caveats:
+  one subject (K-12 math), one annotation scheme, no causal identification, per-lesson Θ is noisy and
+  meaningful mainly in aggregate, and the by-grade trends (edu6) rest on few lessons at grades 8/11/12.
+
 **Modeling decisions worth knowing.**
 
 - The simulator is **2D**, which drops the vortex-stretching term `(ω·∇)u` (it vanishes in 2D), so
@@ -499,6 +582,9 @@ inherit that grading. Read each in the right register:
   form** (§4.5); every operationalization here is an operational stipulation, not a measurement of an
   underlying symmetry.
 
-**What is *not* done.** Real (non-synthetic) empirical validation; a normatively-interpretable robust
-invariant in the non-abelian non-universal band (the central open problem of §6, marked but unsolved);
-the origin of `G` and the cause of symmetry breaking (out of scope by construction).
+**What is *not* done.** Part 3 *measures* on real data but does not *validate*: there is no causal
+identification (instructional mode vs. cohort selection), no second domain or annotation scheme to test
+construct validity, and no human-judgement ground truth for the Θ/uptake verdicts. Also still open: a
+normatively-interpretable robust invariant in the non-abelian non-universal band (the central open
+problem of §6, marked but unsolved); and the origin of `G` and the cause of symmetry breaking (out of
+scope by construction).

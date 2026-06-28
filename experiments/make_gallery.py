@@ -23,6 +23,9 @@ STAGES = [
     ("Ethics e4    -- solidification", "ethics_solidification"),
     ("Ethics e5-e6 -- deliberation attractors, genuine/forged", "ethics_deliberation"),
     ("Ethics e7-e8 -- illness, intimate trolley", "ethics_cases"),
+    # Part 3 -- the empirical case study (requires the TalkMoves corpus; see
+    # experiments/fetch_talkmoves.py -- skipped gracefully if absent)
+    ("Part III edu1-6 -- real classroom case study", "edu_casestudy"),
 ]
 
 
