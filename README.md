@@ -627,3 +627,16 @@ construct validity, and no human-judgement ground truth for the Θ/uptake verdic
 normatively-interpretable robust invariant in the non-abelian non-universal band (the central open
 problem of §6, marked but unsolved); and the origin of `G` and the cause of symmetry breaking (out of
 scope by construction).
+
+---
+
+## License
+
+Copyright © 2026 **Serendip Commons Society**.
+
+This work is licensed under the Creative Commons
+**Attribution-NonCommercial-ShareAlike 4.0 International** License (CC BY-NC-SA 4.0) — see
+[`LICENSE`](LICENSE). You may share and adapt it for non-commercial purposes with attribution,
+distributing derivatives under the same license. The source papers (Huang, Serendip Commons Society)
+carry the same license. The TalkMoves dataset used in Part 3 is separately licensed (also CC BY-NC-SA
+4.0) by its authors and is not included here — it is fetched by `experiments/fetch_talkmoves.py`.
